@@ -27,11 +27,11 @@ class Variant(models.Model):
 class Patient_Variant(models.Model):
     patient = models.IntegerField()
     variant = models.IntegerField()
-    date_created = models.DateTimeField(default = timezone.now)
+    date_created = models.DateTimeField(default=timezone.now)
     classification = models.IntegerField()
 
 class Evidence(models.Model):
     VariantID = models.IntegerField()
     EvidenceCode = models.CharField(max_length=4)
-    DateAssigned = model.DateTimeField(default = timezone.now)
-    DateRetired = model.DateTimeField(blank=True,null=True)
+    DateAssigned = models.DateTimeField(default=timezone.now)
+    DateRetired = models.DateTimeField(blank=True, null=True)
