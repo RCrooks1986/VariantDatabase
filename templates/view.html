@@ -5,12 +5,12 @@
 
 <table>
   <tr>
-  <th>Name</th>
-  <th>Gene</th>
+  <!--<th>Name</th>
+  <th>Gene</th> -->
   <th>cDNA</th>
   <th>Protein</th>
   <th>Genomic</th>
-  <th>No. Patients</th>
+  <!--<th>No. Patients</th> -->
   <th>Pathogenicity</th>
   <th>Evidence Codes</th>
   </tr>
@@ -18,19 +18,18 @@
   {% for variant in variant_data %}
   <tr>
     <td></td>
-    <td>{{ variant.Gene }}</td>
-    <td>{{ variant.cDNA }}</td>
-    <td>{{ variant.Protein }}</td>
-    <td>{{ variant.Genome }}</td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>{{ variant.cnda }}</td>
+    <td>{{ variant.protein }}</td>
+    <td>{{ variant.genome }}</td>
+    <td>{{ variant.pathogenicity }}</td>
+    <td>{{ variant.evidence_codes }}</td>
+
   </tr>
+{% empty %}
+  <td>No variants found</td>
 
   {% endfor %}
 
 </table>
-
-{{ variant_data }}
 
 {% endblock %}

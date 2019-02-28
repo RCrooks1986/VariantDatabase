@@ -10,19 +10,22 @@ def index(request):
         return render(request, 'welcome.html')
 
 
-
 def search_variant(request):
     if request.method=="POST":
         form = VariantForm(request.POST)
         if form.is_valid():
-            input_gene = form.cleaned_data['gene_name']
             input_cdna = form.cleaned_data['cdna_position']
             input_genomic = form.cleaned_data['genomic_position']
-            print(input_gene)
 
-            variant_data = VariantData.objects.all() #filter(field_in_db_filtering_on = input_gene)
-            # pass this within context to the rendered html
-            # if multiple records, iterate over within template
+            if not input_cdna and not input_genomic:
+                variant_data = VariantData.objects.all()
+            elif input_cdna:
+                variant_data = VariantData.objects.filter(cnda=input_cdna)
+            elif input_genomic:
+                variant_data = VariantData.objects.filter(genome=input_genomic)
+            else:
+                variant_data = VariantData.objects.all()
+
 
         return render(request, 'view.html', {'variant_data': variant_data})
     else:
