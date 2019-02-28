@@ -42,16 +42,17 @@ def upload_file(request):
         form = ImportCSV(request.POST, request.FILES)
         if form.is_valid():
             file_contents = request.FILES['upfile'].read().decode('UTF-8')
-            lines = file_contents.split('\n')
-            for line in lines:
+            lines = file_contents.rstrip().split('\n')
+            for i, line in enumerate(lines):
                 if line.startswith("Name"):
                     pass
                 else:
+                    print(i)
                     line = line.rstrip()
                     field = line.split('\t')
+                    print("**", field[0])
 
-                    first_name = field[0].split(' ')[0]
-                    surname = field[0].split(' ')[1]
+                    name = field[0]
                     age = field[1]
                     proband = field[2]
                     affected_relatives = field[3]
@@ -66,16 +67,13 @@ def upload_file(request):
                         evidence_codes = field[12]
                     else:
                         evidence_codes = 'NA'
-                    print(evidence_codes)
 
-                    data = VariantData(first_name=first_name, surname=surname, age=age, proband=proband,
+
+                    data = VariantData(name=name, age=age, proband=proband,
                                        affected_relatives=affected_relatives, stage=stage, description=description,
                                        sequencer=sequencer, cnda=cdna, protein=protein,genome=genome,
                                        pathogenicity=pathogenicity, evidence_codes=evidence_codes )
                     data.save()
-
-
-
         return HttpResponse("File upload page")
     if request.method=="GET":
         form=ImportCSV()

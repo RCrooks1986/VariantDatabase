@@ -44,8 +44,7 @@ from django.utils import timezone
 
 
 class VariantData(models.Model):
-    first_name = models.CharField(max_length=20)
-    surname = models.CharField(max_length=20)
+    name = models.CharField(max_length=50, null=True)
     age = models.IntegerField()
     proband = models.CharField(max_length=20)
     affected_relatives = models.CharField(max_length=20)
