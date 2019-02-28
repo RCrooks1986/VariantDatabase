@@ -1,7 +1,9 @@
 {% extends 'starter.html' %}
 {% block content %}
 
-<h2> Variants</h2>
+<div class="container">
+<h1> Variants</h1>
+  <br/>
 
 <table>
   <tr>
@@ -9,7 +11,7 @@
   <th>Gene</th> -->
   <th>cDNA</th>
   <th>Protein</th>
-  <th>Genomic</th>
+  <th>Genomic position</th>
   <!--<th>No. Patients</th> -->
   <th>Pathogenicity</th>
   <th>Evidence Codes</th>
@@ -17,7 +19,6 @@
 
   {% for variant in variant_data %}
   <tr>
-    <td></td>
     <td>{{ variant.cnda }}</td>
     <td>{{ variant.protein }}</td>
     <td>{{ variant.genome }}</td>
@@ -31,5 +32,5 @@
   {% endfor %}
 
 </table>
-
+</div>
 {% endblock %}

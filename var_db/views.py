@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
-from .forms import VariantForm, ImportCSV
+from .forms import VariantForm, ImportCSV, VariantDataForm
 from .models import VariantData
+
 import csv
 
 # Create your views here.
@@ -37,8 +38,25 @@ def edit_variant(request):
     return render(request, 'edit.html', {'form': form})
 
 def add_variant(request):
-    form=VariantForm()
+    form = VariantDataForm()
+
     return render(request, 'add.html', {'form': form})
+    #if request.METHOD == "POST":
+     #   form = VariantDataForm()
+        #form=VariantDataForm(request.POST)
+        # if form.is_valid():
+        #     input_cdna = form.cleaned_data['cnda']
+        #     input_protein = form.cleaned_data['protein']
+        #     input_genomic = form.cleaned_data['genome']
+        #     input_pathogenicity = form.cleaned_data['pathogenicity']
+        #     input_evidence_codes = form.cleaned_data['evidence_codes']
+        #
+        #     #data = VariantData(cnda=input_cdna, protein=input_protein, genome=input_genomic,
+        #     #                   pathogenicity=input_pathogenicity, evidence_codes=input_evidence_codes)
+        #     #data.save()
+    #else:
+    #    form=VariantDataForm()
+
 
 def upload_file(request):
     if request.method=="POST":

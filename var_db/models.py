@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 
 
+
+
 # class Patient(models.Model):
 #     PatientID = models.IntegerField(null=True)
 #     FirstName = models.CharField(max_length=100)
