@@ -3,7 +3,9 @@ from var_db import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^search$', views.search, name='search'),
-    url(r'^edit$', views.edit, name='edit'),
-    url(r'^add$', views.add, name='add')
+    url(r'^search$', views.search_variant, name='search_variant'),
+    url(r'^edit$', views.edit_variant, name='edit_variant'),
+    url(r'^add$', views.add_variant, name='add_variant'),
+    url(r'^upload$', views.upload_file, name='upload_file')
+
 ]
