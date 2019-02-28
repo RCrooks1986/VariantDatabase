@@ -24,6 +24,7 @@ class Variant(models.Model):
     Protein = models.CharField(max_length=50)
     Genome = models.CharField(max_length=50)
 
+
     def __str__(self):
 
         return self.VariantID
