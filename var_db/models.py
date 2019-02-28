@@ -16,6 +16,7 @@ class Patient(models.Model):
 
 class Variant(models.Model):
     sequencer = models.CharField(max_length=15)
+    gene = models.CharField(max_length=30)
     variant_cnda = models.CharField(max_length = 50)
     variant_protein = models.CharField(max_length=50)
     variant_genome = models.CharField(max_length=50)

@@ -1,0 +1,17 @@
+{% extends 'starter.html' %}
+{% block content %}
+
+<div class="container">
+    <h1>Edit a variant</h1>
+<!-- Search form -->
+<form method="post" action=".">
+    {% csrf_token %}
+
+     {{ form }}
+
+
+    <button type="submit">Update</button>
+    </form>
+</div>
+
+{% endblock %}
