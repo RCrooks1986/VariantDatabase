@@ -7,8 +7,8 @@ class Patient(models.Model):
     FirstName = models.CharField(max_length=100)
     Surname = models.CharField(max_length=100)
     Age = models.IntegerField()
-    Proband = models.CharField()
-    Relatives = models.CharField()
+    Proband = models.CharField(max_length=1)
+    Relatives = models.CharField(max_length=1)
     Stage = models.IntegerField()
     Description = models.CharField(max_length=20)
 
