@@ -18,13 +18,13 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="{% url 'index' %}">Home</a></li>
-      <li><a href="{% url 'search' %}">Search</a></li>
-      <li><a href="{% url 'edit' %}">Edit</a></li>
-      <li><a href="{% url 'add' %}">Add</a></li>
+      <li><a href="{% url 'search_variant' %}">Search</a></li>
+      <li><a href="{% url 'edit_variant' %}">Edit</a></li>
+      <li><a href="{% url 'add_variant' %}">Add</a></li>
+        <li><a href="{% url 'upload_file' %}">Upload</a></li>
     </ul>
   </div>
 </nav>
-
 
 {% block content %}
 <p>Missing content</p>
