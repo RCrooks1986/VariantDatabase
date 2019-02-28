@@ -19,6 +19,7 @@ class Patient(models.Model):
 
 class Variant(models.Model):
     VariantID = models.AutoField(primary_key=True)
+    Gene = models.CharField(max_length = 20)
     cDNA = models.CharField(max_length = 50)
     Protein = models.CharField(max_length=50)
     Genome = models.CharField(max_length=50)
