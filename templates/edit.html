@@ -7,8 +7,11 @@
 <!-- Search form -->
 <form method="post" action=".">
     {% csrf_token %}
+    <table>
+       {{ form }}
+    </table>
 
-     {{ form }}
+
 
 
     <button type="submit">Update</button>

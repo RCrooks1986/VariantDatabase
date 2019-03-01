@@ -5,11 +5,22 @@
 <div class="container">
     <h1>Add a variant</h1>
     <br/>
-<!-- Search form -->
-<form method="post" action=".">
-    {% csrf_token %}
 
-    {{ form }}
+    {% if message %}
+
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+    </div>
+
+    {% endif %}
+
+<!-- Search form -->
+<form method="post" action="">
+    {% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+
 
 
     <button type="submit">Add</button>

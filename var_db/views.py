@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .forms import VariantForm, ImportCSV, VariantDataForm
 from .models import VariantData
 
+
+
 import csv
 
 # Create your views here.
@@ -27,35 +29,57 @@ def search_variant(request):
             else:
                 variant_data = VariantData.objects.all()
 
-
         return render(request, 'view.html', {'variant_data': variant_data})
     else:
         form = VariantForm()
         return render(request, 'search.html', {'form': form})
 
-def edit_variant(request):
-    form = VariantForm()
-    return render(request, 'edit.html', {'form': form})
+
+def edit_variant(request, pk):
+    variant_instance = VariantData.objects.filter(id=pk).first()
+    form = VariantDataForm(instance=variant_instance)
+    if request.method == "POST":
+        form = VariantDataForm(request.POST, instance=variant_instance)
+        if form.is_valid():
+            form.save()
+
+    return render(request, 'edit.html', {'form': form, 'pk': pk})
 
 def add_variant(request):
-    form = VariantDataForm()
+    if request.method=="POST":
+        form = VariantDataForm(request.POST)
+        if form.is_valid():
+            input_cdna = form.cleaned_data['cnda']
+            input_protein = form.cleaned_data['protein']
+            input_genomic = form.cleaned_data['genome']
+            input_pathogenicity = form.cleaned_data['pathogenicity']
+            input_evidence_codes = form.cleaned_data['evidence_codes']
+            input_name = form.cleaned_data['name']
+            input_age = form.cleaned_data['age']
+            input_proband = form.cleaned_data['proband']
+            input_stage = form.cleaned_data['stage']
+            input_affected_relatives = form.cleaned_data['affected_relatives']
+            input_description = form.cleaned_data['description']
+            input_sequencer = form.cleaned_data['sequencer']
 
-    return render(request, 'add.html', {'form': form})
-    #if request.METHOD == "POST":
-     #   form = VariantDataForm()
-        #form=VariantDataForm(request.POST)
-        # if form.is_valid():
-        #     input_cdna = form.cleaned_data['cnda']
-        #     input_protein = form.cleaned_data['protein']
-        #     input_genomic = form.cleaned_data['genome']
-        #     input_pathogenicity = form.cleaned_data['pathogenicity']
-        #     input_evidence_codes = form.cleaned_data['evidence_codes']
-        #
-        #     #data = VariantData(cnda=input_cdna, protein=input_protein, genome=input_genomic,
-        #     #                   pathogenicity=input_pathogenicity, evidence_codes=input_evidence_codes)
-        #     #data.save()
-    #else:
-    #    form=VariantDataForm()
+            data = VariantData(name=input_name, age=input_age, proband=input_proband,
+                               affected_relatives=input_affected_relatives, stage=input_stage, description=input_description,
+                               sequencer=input_sequencer, cnda=input_cdna, protein=input_protein, genome=input_genomic,
+                               pathogenicity=input_pathogenicity, evidence_codes=input_evidence_codes)
+            try:
+                data.save()
+                message = "Success! Variant added to database"
+            except:
+                message = "Fail! There has been a problem"
+
+            form = VariantDataForm()
+
+            return render(request, 'add.html', {'form': form, 'message': message})
+
+    else:
+        form = VariantDataForm()
+
+        return render(request, 'add.html', {'form': form})
 
 
 def upload_file(request):
@@ -68,10 +92,9 @@ def upload_file(request):
                 if line.startswith("Name"):
                     pass
                 else:
-                    print(i)
+                    #print(i)
                     line = line.rstrip()
                     field = line.split('\t')
-                    print("**", field[0])
 
                     name = field[0]
                     age = field[1]
